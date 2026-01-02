@@ -1,29 +1,40 @@
+import 'package:hive/hive.dart';
 import 'package:sample_notes/features/notes/domain/entities/note_entry.dart';
 
-class NoteEntryModel extends NoteEntry {
-  const NoteEntryModel({
-    required super.id,
-    required super.title,
-    required super.body,
-    required super.dateCreated,
-    required super.lastUpdated,
+@HiveType(typeId: 0)
+class NoteEntryModel {
+  @HiveField(0)
+  final String id;
+  @HiveField(1)
+  final String title;
+  @HiveField(2)
+  final String body;
+  @HiveField(3)
+  final DateTime dateCreated;
+  @HiveField(4)
+  final DateTime lastUpdated;
+
+  NoteEntryModel({
+    required this.id,
+    required this.title,
+    required this.body,
+    required this.dateCreated,
+    required this.lastUpdated,
   });
 
-  factory NoteEntryModel.fromJson(Map<String, dynamic> json) {
-    return NoteEntryModel(
-      id: json['id'] as String,
-      title: json['title'] as String,
-      body: json['body'] as String,
-      dateCreated: DateTime.parse(json['dateCreated']),
-      lastUpdated: DateTime.parse(json['lastUpdated']),
-    );
-  }
+  NoteEntry toEntity() => NoteEntry(
+    id: id,
+    title: title,
+    body: body,
+    dateCreated: dateCreated,
+    lastUpdated: lastUpdated,
+  );
 
-  Map<String, dynamic> toJson() => {
-    'id': id,
-    'title': title,
-    'body': body,
-    'dateCreated': dateCreated.toIso8601String(),
-    'lastUpdated': lastUpdated.toIso8601String(),
-  };
+  factory NoteEntryModel.fromEntity(NoteEntry note) => NoteEntryModel(
+    id: note.id,
+    title: note.title,
+    body: note.body,
+    dateCreated: note.dateCreated,
+    lastUpdated: note.lastUpdated,
+  );
 }
