@@ -5,15 +5,13 @@ import 'package:sample_notes/features/notes/domain/dto/update_note_request.dart'
 import 'package:sample_notes/features/notes/domain/entities/note_entry.dart';
 import 'package:sample_notes/features/notes/domain/repository/note_entry_repository.dart';
 
-class UpdateNoteEntry extends UseCase<NoteEntry, NoteEntry> {
+class UpdateNoteEntry extends UseCase<NoteEntry, UpdateNoteRequest> {
   final NoteEntryRepository repository;
 
   UpdateNoteEntry(this.repository);
 
   @override
-  Future<Either<Failure, NoteEntry>> call(NoteEntry note) async {
-    return repository.updateNoteEntry(
-      UpdateNoteRequest(id: note.id, title: note.title, body: note.body),
-    );
+  Future<Either<Failure, NoteEntry>> call(UpdateNoteRequest request) async {
+    return repository.updateNoteEntry(request);
   }
 }

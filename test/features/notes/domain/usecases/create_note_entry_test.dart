@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:sample_notes/features/notes/domain/dto/create_note_request.dart';
 import 'package:sample_notes/features/notes/domain/entities/note_entry.dart';
 import 'package:sample_notes/features/notes/domain/usecases/create_note_entry.dart';
 
@@ -32,7 +33,7 @@ void main() {
 
     // act
     final result = await usecase(
-      Params(title: 'sample title', body: 'sample body'),
+      CreateNoteRequest(title: 'sample title', body: 'sample body'),
     );
 
     // assert
