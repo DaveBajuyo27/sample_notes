@@ -5,7 +5,7 @@ import 'package:sample_notes/features/notes/domain/dto/create_note_request.dart'
 import 'package:sample_notes/features/notes/domain/entities/note_entry.dart';
 import 'package:sample_notes/features/notes/domain/usecases/create_note_entry.dart';
 
-import '../../mocks/note_entry_repository_mocks.mocks.dart';
+import '../../mocks/all_mocks.mocks.dart';
 
 void main() {
   late MockNoteEntryRepository mockNoteEntryRepository;

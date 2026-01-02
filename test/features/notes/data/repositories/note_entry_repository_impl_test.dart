@@ -6,7 +6,7 @@ import 'package:sample_notes/features/notes/data/repositories/note_entry_reposit
 import 'package:sample_notes/features/notes/domain/dto/create_note_request.dart';
 import 'package:sample_notes/features/notes/domain/dto/update_note_request.dart';
 
-import '../../mocks/note_entry_local_datasource_mocks.mocks.dart';
+import '../../mocks/all_mocks.mocks.dart';
 
 void main() {
   late NoteEntryRepositoryImpl repository;

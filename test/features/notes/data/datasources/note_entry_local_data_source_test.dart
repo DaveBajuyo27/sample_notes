@@ -4,7 +4,7 @@ import 'package:sample_notes/core/error/exceptions.dart';
 import 'package:sample_notes/features/notes/data/datasources/note_entry_local_data_source.dart';
 import 'package:sample_notes/features/notes/data/models/note_entry_model.dart';
 
-import '../../mocks/hive_mock.mocks.dart';
+import '../../mocks/all_mocks.mocks.dart';
 
 void main() {
   late MockBox<NoteEntryModel> mockBox;

@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:sample_notes/features/notes/domain/usecases/delete_note_entry.dart';
 
-import '../../mocks/note_entry_repository_mocks.mocks.dart';
+import '../../mocks/all_mocks.mocks.dart';
 
 void main() {
   late MockNoteEntryRepository mockNoteEntryRepository;
