@@ -5,6 +5,29 @@ import 'package:sample_notes/features/notes/presentation/pages/notes_main_page.d
 
 import 'core/di/injection.dart' as di;
 
+///
+/// ### NOTES ###
+///
+/// As of this version:
+/// - bug: it triggers update when note doesn't change (shouldn't be)
+/// - needs logger
+/// - barely any docs
+/// - haven't tried freezed
+/// - getNoteEntry
+///   - which gets a note by id from local data storage
+///   - is unnecessarily implemented
+///   - but for the sake of the demo, I used it nalang
+/// - UI/UX needs work
+/// - I tried implementing the app to have no explicit buttons for create/update/delete
+/// - They are triggered when pressing back from the NoteEditorPage and will depend on the current NoteState
+/// - (I tried mirroring my phone's behavior)
+///   - create is triggered when going through FAB flow (isNewNote == true)
+///   - update is triggered when selected note exists (isNewNote == false, selectedNote != null)
+///     - source of bug draft is not compared to selectedNote
+///   - delete is triggered when draft is empty
+///
+///
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.configureDependencies();
