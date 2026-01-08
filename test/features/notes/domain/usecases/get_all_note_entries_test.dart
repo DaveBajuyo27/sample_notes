@@ -23,6 +23,11 @@ void main() {
     lastUpdated: fixedDate,
   );
 
+  test('should instantiate NoParams', () {
+    final params = NoParams();
+    expect(params.props, []);
+  });
+
   test('should get all note entries from the repository', () async {
     // arrange
     when(
