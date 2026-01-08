@@ -3,38 +3,41 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i6;
-import 'dart:typed_data' as _i9;
+import 'dart:async' as _i12;
+import 'dart:typed_data' as _i15;
 
+import 'package:bloc/bloc.dart' as _i22;
 import 'package:dartz/dartz.dart' as _i4;
 import 'package:hive/hive.dart' as _i2;
-import 'package:hive/src/box/default_compaction_strategy.dart' as _i8;
-import 'package:hive/src/box/default_key_comparator.dart' as _i7;
+import 'package:hive/src/box/default_compaction_strategy.dart' as _i14;
+import 'package:hive/src/box/default_key_comparator.dart' as _i13;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i10;
-import 'package:sample_notes/core/error/failures.dart' as _i12;
+import 'package:mockito/src/dummies.dart' as _i16;
+import 'package:sample_notes/core/error/failures.dart' as _i18;
 import 'package:sample_notes/features/notes/data/datasources/note_entry_local_data_source.dart'
-    as _i11;
+    as _i17;
 import 'package:sample_notes/features/notes/data/models/note_entry_model.dart'
     as _i3;
 import 'package:sample_notes/features/notes/domain/dto/create_note_request.dart'
-    as _i14;
+    as _i20;
 import 'package:sample_notes/features/notes/domain/dto/update_note_request.dart'
-    as _i15;
+    as _i21;
 import 'package:sample_notes/features/notes/domain/entities/note_entry.dart'
-    as _i13;
+    as _i19;
 import 'package:sample_notes/features/notes/domain/repository/note_entry_repository.dart'
     as _i5;
 import 'package:sample_notes/features/notes/domain/usecases/create_note_entry.dart'
-    as _i18;
+    as _i8;
 import 'package:sample_notes/features/notes/domain/usecases/delete_note_entry.dart'
-    as _i19;
+    as _i9;
 import 'package:sample_notes/features/notes/domain/usecases/get_all_note_entries.dart'
-    as _i16;
+    as _i6;
 import 'package:sample_notes/features/notes/domain/usecases/get_note_entry.dart'
-    as _i17;
+    as _i7;
 import 'package:sample_notes/features/notes/domain/usecases/update_note_entry.dart'
-    as _i20;
+    as _i10;
+import 'package:sample_notes/features/notes/presentation/bloc/notes_bloc.dart'
+    as _i11;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -78,6 +81,40 @@ class _FakeNoteEntryRepository_4 extends _i1.SmartFake
     : super(parent, parentInvocation);
 }
 
+class _FakeGetAllNoteEntries_5 extends _i1.SmartFake
+    implements _i6.GetAllNoteEntries {
+  _FakeGetAllNoteEntries_5(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeGetNoteEntry_6 extends _i1.SmartFake implements _i7.GetNoteEntry {
+  _FakeGetNoteEntry_6(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeCreateNoteEntry_7 extends _i1.SmartFake
+    implements _i8.CreateNoteEntry {
+  _FakeCreateNoteEntry_7(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeDeleteNoteEntry_8 extends _i1.SmartFake
+    implements _i9.DeleteNoteEntry {
+  _FakeDeleteNoteEntry_8(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeUpdateNoteEntry_9 extends _i1.SmartFake
+    implements _i10.UpdateNoteEntry {
+  _FakeUpdateNoteEntry_9(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeNotesState_10 extends _i1.SmartFake implements _i11.NotesState {
+  _FakeNotesState_10(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
 /// A class which mocks [HiveInterface].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -97,14 +134,14 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
   );
 
   @override
-  _i6.Future<_i2.Box<E>> openBox<E>(
+  _i12.Future<_i2.Box<E>> openBox<E>(
     String? name, {
     _i2.HiveCipher? encryptionCipher,
-    _i2.KeyComparator? keyComparator = _i7.defaultKeyComparator,
-    _i2.CompactionStrategy? compactionStrategy = _i8.defaultCompactionStrategy,
+    _i2.KeyComparator? keyComparator = _i13.defaultKeyComparator,
+    _i2.CompactionStrategy? compactionStrategy = _i14.defaultCompactionStrategy,
     bool? crashRecovery = true,
     String? path,
-    _i9.Uint8List? bytes,
+    _i15.Uint8List? bytes,
     String? collection,
     List<int>? encryptionKey,
   }) =>
@@ -123,7 +160,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
                 #encryptionKey: encryptionKey,
               },
             ),
-            returnValue: _i6.Future<_i2.Box<E>>.value(
+            returnValue: _i12.Future<_i2.Box<E>>.value(
               _FakeBox_0<E>(
                 this,
                 Invocation.method(
@@ -143,14 +180,14 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
               ),
             ),
           )
-          as _i6.Future<_i2.Box<E>>);
+          as _i12.Future<_i2.Box<E>>);
 
   @override
-  _i6.Future<_i2.LazyBox<E>> openLazyBox<E>(
+  _i12.Future<_i2.LazyBox<E>> openLazyBox<E>(
     String? name, {
     _i2.HiveCipher? encryptionCipher,
-    _i2.KeyComparator? keyComparator = _i7.defaultKeyComparator,
-    _i2.CompactionStrategy? compactionStrategy = _i8.defaultCompactionStrategy,
+    _i2.KeyComparator? keyComparator = _i13.defaultKeyComparator,
+    _i2.CompactionStrategy? compactionStrategy = _i14.defaultCompactionStrategy,
     bool? crashRecovery = true,
     String? path,
     String? collection,
@@ -170,7 +207,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
                 #encryptionKey: encryptionKey,
               },
             ),
-            returnValue: _i6.Future<_i2.LazyBox<E>>.value(
+            returnValue: _i12.Future<_i2.LazyBox<E>>.value(
               _FakeLazyBox_1<E>(
                 this,
                 Invocation.method(
@@ -189,7 +226,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
               ),
             ),
           )
-          as _i6.Future<_i2.LazyBox<E>>);
+          as _i12.Future<_i2.LazyBox<E>>);
 
   @override
   _i2.Box<E> box<E>(String? name) =>
@@ -219,31 +256,31 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
           as bool);
 
   @override
-  _i6.Future<void> close() =>
+  _i12.Future<void> close() =>
       (super.noSuchMethod(
             Invocation.method(#close, []),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
+            returnValue: _i12.Future<void>.value(),
+            returnValueForMissingStub: _i12.Future<void>.value(),
           )
-          as _i6.Future<void>);
+          as _i12.Future<void>);
 
   @override
-  _i6.Future<void> deleteBoxFromDisk(String? name, {String? path}) =>
+  _i12.Future<void> deleteBoxFromDisk(String? name, {String? path}) =>
       (super.noSuchMethod(
             Invocation.method(#deleteBoxFromDisk, [name], {#path: path}),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
+            returnValue: _i12.Future<void>.value(),
+            returnValueForMissingStub: _i12.Future<void>.value(),
           )
-          as _i6.Future<void>);
+          as _i12.Future<void>);
 
   @override
-  _i6.Future<void> deleteFromDisk() =>
+  _i12.Future<void> deleteFromDisk() =>
       (super.noSuchMethod(
             Invocation.method(#deleteFromDisk, []),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
+            returnValue: _i12.Future<void>.value(),
+            returnValueForMissingStub: _i12.Future<void>.value(),
           )
-          as _i6.Future<void>);
+          as _i12.Future<void>);
 
   @override
   List<int> generateSecureKey() =>
@@ -254,12 +291,12 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
           as List<int>);
 
   @override
-  _i6.Future<bool> boxExists(String? name, {String? path}) =>
+  _i12.Future<bool> boxExists(String? name, {String? path}) =>
       (super.noSuchMethod(
             Invocation.method(#boxExists, [name], {#path: path}),
-            returnValue: _i6.Future<bool>.value(false),
+            returnValue: _i12.Future<bool>.value(false),
           )
-          as _i6.Future<bool>);
+          as _i12.Future<bool>);
 
   @override
   void resetAdapters() => super.noSuchMethod(
@@ -313,7 +350,7 @@ class MockBox<E> extends _i1.Mock implements _i2.Box<E> {
   String get name =>
       (super.noSuchMethod(
             Invocation.getter(#name),
-            returnValue: _i10.dummyValue<String>(
+            returnValue: _i16.dummyValue<String>(
               this,
               Invocation.getter(#name),
             ),
@@ -377,12 +414,12 @@ class MockBox<E> extends _i1.Mock implements _i2.Box<E> {
       super.noSuchMethod(Invocation.method(#keyAt, [index]));
 
   @override
-  _i6.Stream<_i2.BoxEvent> watch({dynamic key}) =>
+  _i12.Stream<_i2.BoxEvent> watch({dynamic key}) =>
       (super.noSuchMethod(
             Invocation.method(#watch, [], {#key: key}),
-            returnValue: _i6.Stream<_i2.BoxEvent>.empty(),
+            returnValue: _i12.Stream<_i2.BoxEvent>.empty(),
           )
-          as _i6.Stream<_i2.BoxEvent>);
+          as _i12.Stream<_i2.BoxEvent>);
 
   @override
   bool containsKey(dynamic key) =>
@@ -393,186 +430,186 @@ class MockBox<E> extends _i1.Mock implements _i2.Box<E> {
           as bool);
 
   @override
-  _i6.Future<void> put(dynamic key, E? value) =>
+  _i12.Future<void> put(dynamic key, E? value) =>
       (super.noSuchMethod(
             Invocation.method(#put, [key, value]),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
+            returnValue: _i12.Future<void>.value(),
+            returnValueForMissingStub: _i12.Future<void>.value(),
           )
-          as _i6.Future<void>);
+          as _i12.Future<void>);
 
   @override
-  _i6.Future<void> putAt(int? index, E? value) =>
+  _i12.Future<void> putAt(int? index, E? value) =>
       (super.noSuchMethod(
             Invocation.method(#putAt, [index, value]),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
+            returnValue: _i12.Future<void>.value(),
+            returnValueForMissingStub: _i12.Future<void>.value(),
           )
-          as _i6.Future<void>);
+          as _i12.Future<void>);
 
   @override
-  _i6.Future<void> putAll(Map<dynamic, E>? entries) =>
+  _i12.Future<void> putAll(Map<dynamic, E>? entries) =>
       (super.noSuchMethod(
             Invocation.method(#putAll, [entries]),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
+            returnValue: _i12.Future<void>.value(),
+            returnValueForMissingStub: _i12.Future<void>.value(),
           )
-          as _i6.Future<void>);
+          as _i12.Future<void>);
 
   @override
-  _i6.Future<int> add(E? value) =>
+  _i12.Future<int> add(E? value) =>
       (super.noSuchMethod(
             Invocation.method(#add, [value]),
-            returnValue: _i6.Future<int>.value(0),
+            returnValue: _i12.Future<int>.value(0),
           )
-          as _i6.Future<int>);
+          as _i12.Future<int>);
 
   @override
-  _i6.Future<Iterable<int>> addAll(Iterable<E>? values) =>
+  _i12.Future<Iterable<int>> addAll(Iterable<E>? values) =>
       (super.noSuchMethod(
             Invocation.method(#addAll, [values]),
-            returnValue: _i6.Future<Iterable<int>>.value(<int>[]),
+            returnValue: _i12.Future<Iterable<int>>.value(<int>[]),
           )
-          as _i6.Future<Iterable<int>>);
+          as _i12.Future<Iterable<int>>);
 
   @override
-  _i6.Future<void> delete(dynamic key) =>
+  _i12.Future<void> delete(dynamic key) =>
       (super.noSuchMethod(
             Invocation.method(#delete, [key]),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
+            returnValue: _i12.Future<void>.value(),
+            returnValueForMissingStub: _i12.Future<void>.value(),
           )
-          as _i6.Future<void>);
+          as _i12.Future<void>);
 
   @override
-  _i6.Future<void> deleteAt(int? index) =>
+  _i12.Future<void> deleteAt(int? index) =>
       (super.noSuchMethod(
             Invocation.method(#deleteAt, [index]),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
+            returnValue: _i12.Future<void>.value(),
+            returnValueForMissingStub: _i12.Future<void>.value(),
           )
-          as _i6.Future<void>);
+          as _i12.Future<void>);
 
   @override
-  _i6.Future<void> deleteAll(Iterable<dynamic>? keys) =>
+  _i12.Future<void> deleteAll(Iterable<dynamic>? keys) =>
       (super.noSuchMethod(
             Invocation.method(#deleteAll, [keys]),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
+            returnValue: _i12.Future<void>.value(),
+            returnValueForMissingStub: _i12.Future<void>.value(),
           )
-          as _i6.Future<void>);
+          as _i12.Future<void>);
 
   @override
-  _i6.Future<void> compact() =>
+  _i12.Future<void> compact() =>
       (super.noSuchMethod(
             Invocation.method(#compact, []),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
+            returnValue: _i12.Future<void>.value(),
+            returnValueForMissingStub: _i12.Future<void>.value(),
           )
-          as _i6.Future<void>);
+          as _i12.Future<void>);
 
   @override
-  _i6.Future<int> clear() =>
+  _i12.Future<int> clear() =>
       (super.noSuchMethod(
             Invocation.method(#clear, []),
-            returnValue: _i6.Future<int>.value(0),
+            returnValue: _i12.Future<int>.value(0),
           )
-          as _i6.Future<int>);
+          as _i12.Future<int>);
 
   @override
-  _i6.Future<void> close() =>
+  _i12.Future<void> close() =>
       (super.noSuchMethod(
             Invocation.method(#close, []),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
+            returnValue: _i12.Future<void>.value(),
+            returnValueForMissingStub: _i12.Future<void>.value(),
           )
-          as _i6.Future<void>);
+          as _i12.Future<void>);
 
   @override
-  _i6.Future<void> deleteFromDisk() =>
+  _i12.Future<void> deleteFromDisk() =>
       (super.noSuchMethod(
             Invocation.method(#deleteFromDisk, []),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
+            returnValue: _i12.Future<void>.value(),
+            returnValueForMissingStub: _i12.Future<void>.value(),
           )
-          as _i6.Future<void>);
+          as _i12.Future<void>);
 
   @override
-  _i6.Future<void> flush() =>
+  _i12.Future<void> flush() =>
       (super.noSuchMethod(
             Invocation.method(#flush, []),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
+            returnValue: _i12.Future<void>.value(),
+            returnValueForMissingStub: _i12.Future<void>.value(),
           )
-          as _i6.Future<void>);
+          as _i12.Future<void>);
 }
 
 /// A class which mocks [NoteEntryLocalDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockNoteEntryLocalDataSource extends _i1.Mock
-    implements _i11.NoteEntryLocalDataSource {
+    implements _i17.NoteEntryLocalDataSource {
   MockNoteEntryLocalDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<List<_i3.NoteEntryModel>> getAllNoteEntries() =>
+  _i12.Future<List<_i3.NoteEntryModel>> getAllNoteEntries() =>
       (super.noSuchMethod(
             Invocation.method(#getAllNoteEntries, []),
-            returnValue: _i6.Future<List<_i3.NoteEntryModel>>.value(
+            returnValue: _i12.Future<List<_i3.NoteEntryModel>>.value(
               <_i3.NoteEntryModel>[],
             ),
           )
-          as _i6.Future<List<_i3.NoteEntryModel>>);
+          as _i12.Future<List<_i3.NoteEntryModel>>);
 
   @override
-  _i6.Future<_i3.NoteEntryModel> getNoteEntry(String? id) =>
+  _i12.Future<_i3.NoteEntryModel> getNoteEntry(String? id) =>
       (super.noSuchMethod(
             Invocation.method(#getNoteEntry, [id]),
-            returnValue: _i6.Future<_i3.NoteEntryModel>.value(
+            returnValue: _i12.Future<_i3.NoteEntryModel>.value(
               _FakeNoteEntryModel_2(
                 this,
                 Invocation.method(#getNoteEntry, [id]),
               ),
             ),
           )
-          as _i6.Future<_i3.NoteEntryModel>);
+          as _i12.Future<_i3.NoteEntryModel>);
 
   @override
-  _i6.Future<_i3.NoteEntryModel> createNoteEntry(_i3.NoteEntryModel? note) =>
+  _i12.Future<_i3.NoteEntryModel> createNoteEntry(_i3.NoteEntryModel? note) =>
       (super.noSuchMethod(
             Invocation.method(#createNoteEntry, [note]),
-            returnValue: _i6.Future<_i3.NoteEntryModel>.value(
+            returnValue: _i12.Future<_i3.NoteEntryModel>.value(
               _FakeNoteEntryModel_2(
                 this,
                 Invocation.method(#createNoteEntry, [note]),
               ),
             ),
           )
-          as _i6.Future<_i3.NoteEntryModel>);
+          as _i12.Future<_i3.NoteEntryModel>);
 
   @override
-  _i6.Future<_i3.NoteEntryModel> updateNoteEntry(_i3.NoteEntryModel? note) =>
+  _i12.Future<_i3.NoteEntryModel> updateNoteEntry(_i3.NoteEntryModel? note) =>
       (super.noSuchMethod(
             Invocation.method(#updateNoteEntry, [note]),
-            returnValue: _i6.Future<_i3.NoteEntryModel>.value(
+            returnValue: _i12.Future<_i3.NoteEntryModel>.value(
               _FakeNoteEntryModel_2(
                 this,
                 Invocation.method(#updateNoteEntry, [note]),
               ),
             ),
           )
-          as _i6.Future<_i3.NoteEntryModel>);
+          as _i12.Future<_i3.NoteEntryModel>);
 
   @override
-  _i6.Future<void> deleteNoteEntry(String? id) =>
+  _i12.Future<void> deleteNoteEntry(String? id) =>
       (super.noSuchMethod(
             Invocation.method(#deleteNoteEntry, [id]),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
+            returnValue: _i12.Future<void>.value(),
+            returnValueForMissingStub: _i12.Future<void>.value(),
           )
-          as _i6.Future<void>);
+          as _i12.Future<void>);
 }
 
 /// A class which mocks [NoteEntryRepository].
@@ -585,88 +622,88 @@ class MockNoteEntryRepository extends _i1.Mock
   }
 
   @override
-  _i6.Future<_i4.Either<_i12.Failure, List<_i13.NoteEntry>>>
+  _i12.Future<_i4.Either<_i18.Failure, List<_i19.NoteEntry>>>
   getAllNoteEntries() =>
       (super.noSuchMethod(
             Invocation.method(#getAllNoteEntries, []),
             returnValue:
-                _i6.Future<
-                  _i4.Either<_i12.Failure, List<_i13.NoteEntry>>
+                _i12.Future<
+                  _i4.Either<_i18.Failure, List<_i19.NoteEntry>>
                 >.value(
-                  _FakeEither_3<_i12.Failure, List<_i13.NoteEntry>>(
+                  _FakeEither_3<_i18.Failure, List<_i19.NoteEntry>>(
                     this,
                     Invocation.method(#getAllNoteEntries, []),
                   ),
                 ),
           )
-          as _i6.Future<_i4.Either<_i12.Failure, List<_i13.NoteEntry>>>);
+          as _i12.Future<_i4.Either<_i18.Failure, List<_i19.NoteEntry>>>);
 
   @override
-  _i6.Future<_i4.Either<_i12.Failure, _i13.NoteEntry>> getNoteEntry(
+  _i12.Future<_i4.Either<_i18.Failure, _i19.NoteEntry>> getNoteEntry(
     String? id,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#getNoteEntry, [id]),
             returnValue:
-                _i6.Future<_i4.Either<_i12.Failure, _i13.NoteEntry>>.value(
-                  _FakeEither_3<_i12.Failure, _i13.NoteEntry>(
+                _i12.Future<_i4.Either<_i18.Failure, _i19.NoteEntry>>.value(
+                  _FakeEither_3<_i18.Failure, _i19.NoteEntry>(
                     this,
                     Invocation.method(#getNoteEntry, [id]),
                   ),
                 ),
           )
-          as _i6.Future<_i4.Either<_i12.Failure, _i13.NoteEntry>>);
+          as _i12.Future<_i4.Either<_i18.Failure, _i19.NoteEntry>>);
 
   @override
-  _i6.Future<_i4.Either<_i12.Failure, _i13.NoteEntry>> createNoteEntry(
-    _i14.CreateNoteRequest? request,
+  _i12.Future<_i4.Either<_i18.Failure, _i19.NoteEntry>> createNoteEntry(
+    _i20.CreateNoteRequest? request,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#createNoteEntry, [request]),
             returnValue:
-                _i6.Future<_i4.Either<_i12.Failure, _i13.NoteEntry>>.value(
-                  _FakeEither_3<_i12.Failure, _i13.NoteEntry>(
+                _i12.Future<_i4.Either<_i18.Failure, _i19.NoteEntry>>.value(
+                  _FakeEither_3<_i18.Failure, _i19.NoteEntry>(
                     this,
                     Invocation.method(#createNoteEntry, [request]),
                   ),
                 ),
           )
-          as _i6.Future<_i4.Either<_i12.Failure, _i13.NoteEntry>>);
+          as _i12.Future<_i4.Either<_i18.Failure, _i19.NoteEntry>>);
 
   @override
-  _i6.Future<_i4.Either<_i12.Failure, _i13.NoteEntry>> updateNoteEntry(
-    _i15.UpdateNoteRequest? request,
+  _i12.Future<_i4.Either<_i18.Failure, _i19.NoteEntry>> updateNoteEntry(
+    _i21.UpdateNoteRequest? request,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#updateNoteEntry, [request]),
             returnValue:
-                _i6.Future<_i4.Either<_i12.Failure, _i13.NoteEntry>>.value(
-                  _FakeEither_3<_i12.Failure, _i13.NoteEntry>(
+                _i12.Future<_i4.Either<_i18.Failure, _i19.NoteEntry>>.value(
+                  _FakeEither_3<_i18.Failure, _i19.NoteEntry>(
                     this,
                     Invocation.method(#updateNoteEntry, [request]),
                   ),
                 ),
           )
-          as _i6.Future<_i4.Either<_i12.Failure, _i13.NoteEntry>>);
+          as _i12.Future<_i4.Either<_i18.Failure, _i19.NoteEntry>>);
 
   @override
-  _i6.Future<_i4.Either<_i12.Failure, void>> deleteNoteEntry(String? id) =>
+  _i12.Future<_i4.Either<_i18.Failure, void>> deleteNoteEntry(String? id) =>
       (super.noSuchMethod(
             Invocation.method(#deleteNoteEntry, [id]),
-            returnValue: _i6.Future<_i4.Either<_i12.Failure, void>>.value(
-              _FakeEither_3<_i12.Failure, void>(
+            returnValue: _i12.Future<_i4.Either<_i18.Failure, void>>.value(
+              _FakeEither_3<_i18.Failure, void>(
                 this,
                 Invocation.method(#deleteNoteEntry, [id]),
               ),
             ),
           )
-          as _i6.Future<_i4.Either<_i12.Failure, void>>);
+          as _i12.Future<_i4.Either<_i18.Failure, void>>);
 }
 
 /// A class which mocks [GetAllNoteEntries].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetAllNoteEntries extends _i1.Mock implements _i16.GetAllNoteEntries {
+class MockGetAllNoteEntries extends _i1.Mock implements _i6.GetAllNoteEntries {
   MockGetAllNoteEntries() {
     _i1.throwOnMissingStub(this);
   }
@@ -683,28 +720,28 @@ class MockGetAllNoteEntries extends _i1.Mock implements _i16.GetAllNoteEntries {
           as _i5.NoteEntryRepository);
 
   @override
-  _i6.Future<_i4.Either<_i12.Failure, List<_i13.NoteEntry>>> call(
-    _i16.NoParams? params,
+  _i12.Future<_i4.Either<_i18.Failure, List<_i19.NoteEntry>>> call(
+    _i6.NoParams? params,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#call, [params]),
             returnValue:
-                _i6.Future<
-                  _i4.Either<_i12.Failure, List<_i13.NoteEntry>>
+                _i12.Future<
+                  _i4.Either<_i18.Failure, List<_i19.NoteEntry>>
                 >.value(
-                  _FakeEither_3<_i12.Failure, List<_i13.NoteEntry>>(
+                  _FakeEither_3<_i18.Failure, List<_i19.NoteEntry>>(
                     this,
                     Invocation.method(#call, [params]),
                   ),
                 ),
           )
-          as _i6.Future<_i4.Either<_i12.Failure, List<_i13.NoteEntry>>>);
+          as _i12.Future<_i4.Either<_i18.Failure, List<_i19.NoteEntry>>>);
 }
 
 /// A class which mocks [GetNoteEntry].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetNoteEntry extends _i1.Mock implements _i17.GetNoteEntry {
+class MockGetNoteEntry extends _i1.Mock implements _i7.GetNoteEntry {
   MockGetNoteEntry() {
     _i1.throwOnMissingStub(this);
   }
@@ -721,24 +758,24 @@ class MockGetNoteEntry extends _i1.Mock implements _i17.GetNoteEntry {
           as _i5.NoteEntryRepository);
 
   @override
-  _i6.Future<_i4.Either<_i12.Failure, _i13.NoteEntry>> call(String? id) =>
+  _i12.Future<_i4.Either<_i18.Failure, _i19.NoteEntry>> call(String? id) =>
       (super.noSuchMethod(
             Invocation.method(#call, [id]),
             returnValue:
-                _i6.Future<_i4.Either<_i12.Failure, _i13.NoteEntry>>.value(
-                  _FakeEither_3<_i12.Failure, _i13.NoteEntry>(
+                _i12.Future<_i4.Either<_i18.Failure, _i19.NoteEntry>>.value(
+                  _FakeEither_3<_i18.Failure, _i19.NoteEntry>(
                     this,
                     Invocation.method(#call, [id]),
                   ),
                 ),
           )
-          as _i6.Future<_i4.Either<_i12.Failure, _i13.NoteEntry>>);
+          as _i12.Future<_i4.Either<_i18.Failure, _i19.NoteEntry>>);
 }
 
 /// A class which mocks [CreateNoteEntry].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockCreateNoteEntry extends _i1.Mock implements _i18.CreateNoteEntry {
+class MockCreateNoteEntry extends _i1.Mock implements _i8.CreateNoteEntry {
   MockCreateNoteEntry() {
     _i1.throwOnMissingStub(this);
   }
@@ -755,26 +792,26 @@ class MockCreateNoteEntry extends _i1.Mock implements _i18.CreateNoteEntry {
           as _i5.NoteEntryRepository);
 
   @override
-  _i6.Future<_i4.Either<_i12.Failure, _i13.NoteEntry>> call(
-    _i14.CreateNoteRequest? request,
+  _i12.Future<_i4.Either<_i18.Failure, _i19.NoteEntry>> call(
+    _i20.CreateNoteRequest? request,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#call, [request]),
             returnValue:
-                _i6.Future<_i4.Either<_i12.Failure, _i13.NoteEntry>>.value(
-                  _FakeEither_3<_i12.Failure, _i13.NoteEntry>(
+                _i12.Future<_i4.Either<_i18.Failure, _i19.NoteEntry>>.value(
+                  _FakeEither_3<_i18.Failure, _i19.NoteEntry>(
                     this,
                     Invocation.method(#call, [request]),
                   ),
                 ),
           )
-          as _i6.Future<_i4.Either<_i12.Failure, _i13.NoteEntry>>);
+          as _i12.Future<_i4.Either<_i18.Failure, _i19.NoteEntry>>);
 }
 
 /// A class which mocks [DeleteNoteEntry].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockDeleteNoteEntry extends _i1.Mock implements _i19.DeleteNoteEntry {
+class MockDeleteNoteEntry extends _i1.Mock implements _i9.DeleteNoteEntry {
   MockDeleteNoteEntry() {
     _i1.throwOnMissingStub(this);
   }
@@ -791,23 +828,23 @@ class MockDeleteNoteEntry extends _i1.Mock implements _i19.DeleteNoteEntry {
           as _i5.NoteEntryRepository);
 
   @override
-  _i6.Future<_i4.Either<_i12.Failure, void>> call(String? id) =>
+  _i12.Future<_i4.Either<_i18.Failure, void>> call(String? id) =>
       (super.noSuchMethod(
             Invocation.method(#call, [id]),
-            returnValue: _i6.Future<_i4.Either<_i12.Failure, void>>.value(
-              _FakeEither_3<_i12.Failure, void>(
+            returnValue: _i12.Future<_i4.Either<_i18.Failure, void>>.value(
+              _FakeEither_3<_i18.Failure, void>(
                 this,
                 Invocation.method(#call, [id]),
               ),
             ),
           )
-          as _i6.Future<_i4.Either<_i12.Failure, void>>);
+          as _i12.Future<_i4.Either<_i18.Failure, void>>);
 }
 
 /// A class which mocks [UpdateNoteEntry].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUpdateNoteEntry extends _i1.Mock implements _i20.UpdateNoteEntry {
+class MockUpdateNoteEntry extends _i1.Mock implements _i10.UpdateNoteEntry {
   MockUpdateNoteEntry() {
     _i1.throwOnMissingStub(this);
   }
@@ -824,18 +861,189 @@ class MockUpdateNoteEntry extends _i1.Mock implements _i20.UpdateNoteEntry {
           as _i5.NoteEntryRepository);
 
   @override
-  _i6.Future<_i4.Either<_i12.Failure, _i13.NoteEntry>> call(
-    _i15.UpdateNoteRequest? request,
+  _i12.Future<_i4.Either<_i18.Failure, _i19.NoteEntry>> call(
+    _i21.UpdateNoteRequest? request,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#call, [request]),
             returnValue:
-                _i6.Future<_i4.Either<_i12.Failure, _i13.NoteEntry>>.value(
-                  _FakeEither_3<_i12.Failure, _i13.NoteEntry>(
+                _i12.Future<_i4.Either<_i18.Failure, _i19.NoteEntry>>.value(
+                  _FakeEither_3<_i18.Failure, _i19.NoteEntry>(
                     this,
                     Invocation.method(#call, [request]),
                   ),
                 ),
           )
-          as _i6.Future<_i4.Either<_i12.Failure, _i13.NoteEntry>>);
+          as _i12.Future<_i4.Either<_i18.Failure, _i19.NoteEntry>>);
+}
+
+/// A class which mocks [NotesBloc].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockNotesBloc extends _i1.Mock implements _i11.NotesBloc {
+  MockNotesBloc() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i6.GetAllNoteEntries get getAllNoteEntries =>
+      (super.noSuchMethod(
+            Invocation.getter(#getAllNoteEntries),
+            returnValue: _FakeGetAllNoteEntries_5(
+              this,
+              Invocation.getter(#getAllNoteEntries),
+            ),
+          )
+          as _i6.GetAllNoteEntries);
+
+  @override
+  _i7.GetNoteEntry get getNoteEntry =>
+      (super.noSuchMethod(
+            Invocation.getter(#getNoteEntry),
+            returnValue: _FakeGetNoteEntry_6(
+              this,
+              Invocation.getter(#getNoteEntry),
+            ),
+          )
+          as _i7.GetNoteEntry);
+
+  @override
+  _i8.CreateNoteEntry get createNoteEntry =>
+      (super.noSuchMethod(
+            Invocation.getter(#createNoteEntry),
+            returnValue: _FakeCreateNoteEntry_7(
+              this,
+              Invocation.getter(#createNoteEntry),
+            ),
+          )
+          as _i8.CreateNoteEntry);
+
+  @override
+  _i9.DeleteNoteEntry get deleteNoteEntry =>
+      (super.noSuchMethod(
+            Invocation.getter(#deleteNoteEntry),
+            returnValue: _FakeDeleteNoteEntry_8(
+              this,
+              Invocation.getter(#deleteNoteEntry),
+            ),
+          )
+          as _i9.DeleteNoteEntry);
+
+  @override
+  _i10.UpdateNoteEntry get updateNoteEntry =>
+      (super.noSuchMethod(
+            Invocation.getter(#updateNoteEntry),
+            returnValue: _FakeUpdateNoteEntry_9(
+              this,
+              Invocation.getter(#updateNoteEntry),
+            ),
+          )
+          as _i10.UpdateNoteEntry);
+
+  @override
+  List<_i19.NoteEntry> get notes =>
+      (super.noSuchMethod(
+            Invocation.getter(#notes),
+            returnValue: <_i19.NoteEntry>[],
+          )
+          as List<_i19.NoteEntry>);
+
+  @override
+  set notes(List<_i19.NoteEntry>? value) => super.noSuchMethod(
+    Invocation.setter(#notes, value),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  _i11.NotesState get state =>
+      (super.noSuchMethod(
+            Invocation.getter(#state),
+            returnValue: _FakeNotesState_10(this, Invocation.getter(#state)),
+          )
+          as _i11.NotesState);
+
+  @override
+  _i12.Stream<_i11.NotesState> get stream =>
+      (super.noSuchMethod(
+            Invocation.getter(#stream),
+            returnValue: _i12.Stream<_i11.NotesState>.empty(),
+          )
+          as _i12.Stream<_i11.NotesState>);
+
+  @override
+  bool get isClosed =>
+      (super.noSuchMethod(Invocation.getter(#isClosed), returnValue: false)
+          as bool);
+
+  @override
+  void add(_i11.NotesEvent? event) => super.noSuchMethod(
+    Invocation.method(#add, [event]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void onEvent(_i11.NotesEvent? event) => super.noSuchMethod(
+    Invocation.method(#onEvent, [event]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void emit(_i11.NotesState? state) => super.noSuchMethod(
+    Invocation.method(#emit, [state]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void on<E extends _i11.NotesEvent>(
+    _i22.EventHandler<E, _i11.NotesState>? handler, {
+    _i22.EventTransformer<E>? transformer,
+  }) => super.noSuchMethod(
+    Invocation.method(#on, [handler], {#transformer: transformer}),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void onTransition(
+    _i22.Transition<_i11.NotesEvent, _i11.NotesState>? transition,
+  ) => super.noSuchMethod(
+    Invocation.method(#onTransition, [transition]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void onDone(
+    _i11.NotesEvent? event, [
+    Object? error,
+    StackTrace? stackTrace,
+  ]) => super.noSuchMethod(
+    Invocation.method(#onDone, [event, error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  _i12.Future<void> close() =>
+      (super.noSuchMethod(
+            Invocation.method(#close, []),
+            returnValue: _i12.Future<void>.value(),
+            returnValueForMissingStub: _i12.Future<void>.value(),
+          )
+          as _i12.Future<void>);
+
+  @override
+  void onChange(_i22.Change<_i11.NotesState>? change) => super.noSuchMethod(
+    Invocation.method(#onChange, [change]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void addError(Object? error, [StackTrace? stackTrace]) => super.noSuchMethod(
+    Invocation.method(#addError, [error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void onError(Object? error, StackTrace? stackTrace) => super.noSuchMethod(
+    Invocation.method(#onError, [error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
 }

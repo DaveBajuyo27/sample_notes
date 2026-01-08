@@ -7,6 +7,7 @@ import 'package:sample_notes/features/notes/domain/usecases/delete_note_entry.da
 import 'package:sample_notes/features/notes/domain/usecases/get_all_note_entries.dart';
 import 'package:sample_notes/features/notes/domain/usecases/get_note_entry.dart';
 import 'package:sample_notes/features/notes/domain/usecases/update_note_entry.dart';
+import 'package:sample_notes/features/notes/presentation/bloc/notes_bloc.dart';
 
 @GenerateMocks([
   HiveInterface,
@@ -18,5 +19,6 @@ import 'package:sample_notes/features/notes/domain/usecases/update_note_entry.da
   CreateNoteEntry,
   DeleteNoteEntry,
   UpdateNoteEntry,
+  NotesBloc,
 ])
 void main() {}
