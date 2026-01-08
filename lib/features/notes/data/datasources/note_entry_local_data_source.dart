@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:injectable/injectable.dart';
 import 'package:sample_notes/core/error/exceptions.dart';
 import 'package:sample_notes/features/notes/data/models/note_entry_model.dart';
 
@@ -11,6 +12,7 @@ abstract class NoteEntryLocalDataSource {
   Future<void> deleteNoteEntry(String id);
 }
 
+@LazySingleton(as: NoteEntryLocalDataSource)
 class NoteEntryLocalDataSourceImpl implements NoteEntryLocalDataSource {
   final Box<NoteEntryModel> noteBox;
 
