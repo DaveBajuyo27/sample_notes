@@ -13,6 +13,7 @@ import 'core/di/injection.dart' as di;
 /// - needs logger
 /// - barely any docs
 /// - haven't tried freezed
+/// - GIVEN-WHEN-THEN not implemented in test specs
 /// - getNoteEntry
 ///   - which gets a note by id from local data storage
 ///   - is unnecessarily implemented
