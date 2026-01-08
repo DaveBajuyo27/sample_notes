@@ -15,16 +15,6 @@ class NoteEntry extends Equatable {
     required this.lastUpdated,
   });
 
-  NoteEntry update({String? title, String? body}) {
-    return NoteEntry(
-      id: id,
-      title: title ?? this.title,
-      body: body ?? this.body,
-      dateCreated: dateCreated,
-      lastUpdated: DateTime.now(),
-    );
-  }
-
   @override
   List<Object?> get props => [id];
 }
