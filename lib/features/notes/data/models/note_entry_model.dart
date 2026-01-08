@@ -1,17 +1,10 @@
-import 'package:hive/hive.dart';
 import 'package:sample_notes/features/notes/domain/entities/note_entry.dart';
 
-@HiveType(typeId: 0)
 class NoteEntryModel {
-  @HiveField(0)
   final String id;
-  @HiveField(1)
   final String title;
-  @HiveField(2)
   final String body;
-  @HiveField(3)
   final DateTime dateCreated;
-  @HiveField(4)
   final DateTime lastUpdated;
 
   NoteEntryModel({
