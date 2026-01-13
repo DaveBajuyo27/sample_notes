@@ -143,6 +143,22 @@ void main() {
     );
 
     test(
+      'should NOT update existing note when isNewNote false and draft = selectedNote when EditorClosed',
+      () async {
+        when(mockUpdate(any)).thenAnswer((_) async => Right(tNote));
+        when(mockGetAll(any)).thenAnswer((_) async => Right(tNotesList));
+
+        bloc.emit(bloc.state.copyWith(selectedNote: tNote, isNewNote: false));
+        bloc.add(EditorClosed('sample title', 'sample body', false));
+        await Future.delayed(Duration.zero);
+
+        verifyNever(mockUpdate(any));
+        verifyNever(mockGetAll(any));
+        expect(bloc.state.isLoading, false);
+      },
+    );
+
+    test(
       'should delete note when draft is empty and isNewNote false when EditorClosed',
       () async {
         when(mockDelete(any)).thenAnswer((_) async => Right(null));
@@ -162,13 +178,14 @@ void main() {
     test(
       'should do nothing when selectedNote is null and isNewNote false when EditorClosed',
       () async {
-        when(mockDelete(any)).thenAnswer((_) async => Right(null));
         when(mockGetAll(any)).thenAnswer((_) async => Right(tNotesList));
 
         bloc.emit(bloc.state.copyWith(selectedNote: null, isNewNote: false));
         bloc.add(EditorClosed('', '', false));
         await Future.delayed(Duration.zero);
 
+        verifyNever(mockUpdate(any));
+        verifyNever(mockGetAll(any));
         expect(bloc.state.isLoading, false);
       },
     );

@@ -111,7 +111,13 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
       }
     } else {
       final selectedNote = state.selectedNote;
+      // if selectedNote is null, do nothing
       if (selectedNote == null) {
+        emit(state.copyWith(isLoading: false));
+        return;
+      }
+      // if draft is same as selectedNote, do nothing
+      if (selectedNote.title == draftTitle && selectedNote.body == draftBody) {
         emit(state.copyWith(isLoading: false));
         return;
       }
