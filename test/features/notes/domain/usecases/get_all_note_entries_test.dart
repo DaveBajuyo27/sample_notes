@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:sample_notes/features/notes/domain/entities/note_entry.dart';
 import 'package:sample_notes/features/notes/domain/usecases/get_all_note_entries.dart';
-import '../../mocks/note_entry_repository_mocks.mocks.dart';
+import '../../mocks/all_mocks.mocks.dart';
 
 void main() {
   late MockNoteEntryRepository mockNoteEntryRepository;
@@ -22,6 +22,11 @@ void main() {
     dateCreated: fixedDate,
     lastUpdated: fixedDate,
   );
+
+  test('should instantiate NoParams', () {
+    final params = NoParams();
+    expect(params.props, []);
+  });
 
   test('should get all note entries from the repository', () async {
     // arrange

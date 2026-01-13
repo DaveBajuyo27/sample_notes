@@ -1,12 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:sample_notes/core/error/exceptions.dart';
+import 'package:sample_notes/core/error/failures.dart';
 import 'package:sample_notes/features/notes/data/models/note_entry_model.dart';
 import 'package:sample_notes/features/notes/data/repositories/note_entry_repository_impl.dart';
 import 'package:sample_notes/features/notes/domain/dto/create_note_request.dart';
 import 'package:sample_notes/features/notes/domain/dto/update_note_request.dart';
 
-import '../../mocks/note_entry_local_datasource_mocks.mocks.dart';
+import '../../mocks/all_mocks.mocks.dart';
 
 void main() {
   late NoteEntryRepositoryImpl repository;
@@ -52,7 +53,7 @@ void main() {
       },
     );
     test(
-      'should return a LocalStorageFailure when an Exception occurs during note creation',
+      'should return a LocalStorageFailure when a LocalStorageException occurs during note creation',
       () async {
         // arrange
         when(
@@ -63,7 +64,32 @@ void main() {
           CreateNoteRequest(title: 'sample title', body: 'sample body'),
         );
         // assert
-        result.fold((failure) => expect(true, true), (createdNote) {
+        result.fold((failure) => expect(failure, isA<LocalStorageFailure>()), (
+          createdNote,
+        ) {
+          fail(
+            'expected to throw exception but got note titled=${createdNote.title} instead',
+          );
+        });
+
+        verify(localDataSource.createNoteEntry(any));
+        verifyNoMoreInteractions(localDataSource);
+      },
+    );
+
+    test(
+      'should return an UnexpectedFailure when any Exception occurs during note creation',
+      () async {
+        // arrange
+        when(localDataSource.createNoteEntry(any)).thenThrow(Exception());
+        // action
+        final result = await repository.createNoteEntry(
+          CreateNoteRequest(title: 'sample title', body: 'sample body'),
+        );
+        // assert
+        result.fold((failure) => expect(failure, isA<UnexpectedFailure>()), (
+          createdNote,
+        ) {
           fail(
             'expected to throw exception but got note titled=${createdNote.title} instead',
           );
@@ -103,7 +129,9 @@ void main() {
         // action
         final result = await repository.deleteNoteEntry('sampleId');
         // assert
-        result.fold((failure) => expect(true, true), (deletedNote) {
+        result.fold((failure) => expect(failure, isA<LocalStorageFailure>()), (
+          deletedNote,
+        ) {
           fail('expected to throw exception but got something instead');
         });
 
@@ -122,7 +150,28 @@ void main() {
         // action
         final result = await repository.deleteNoteEntry('sampleId');
         // assert
-        result.fold((failure) => expect(true, true), (deletedNote) {
+        result.fold((failure) => expect(failure, isA<NoteNotFoundFailure>()), (
+          deletedNote,
+        ) {
+          fail('expected to throw exception but got something instead');
+        });
+
+        verify(localDataSource.deleteNoteEntry(any));
+        verifyNoMoreInteractions(localDataSource);
+      },
+    );
+
+    test(
+      'should return a UnexpectedFailure when any Exception occurs during note deletion',
+      () async {
+        // arrange
+        when(localDataSource.deleteNoteEntry(any)).thenThrow(Exception());
+        // action
+        final result = await repository.deleteNoteEntry('sampleId');
+        // assert
+        result.fold((failure) => expect(failure, isA<UnexpectedFailure>()), (
+          deletedNote,
+        ) {
           fail('expected to throw exception but got something instead');
         });
 
@@ -149,7 +198,7 @@ void main() {
       verifyNoMoreInteractions(localDataSource);
     });
     test(
-      'should return a LocalStorageFailure when an Exception occurs during note fetching',
+      'should return a LocalStorageFailure when an LocalStorageException occurs during note fetching',
       () async {
         // arrange
         when(
@@ -158,7 +207,28 @@ void main() {
         // action
         final result = await repository.getAllNoteEntries();
         // assert
-        result.fold((failure) => expect(true, true), (list) {
+        result.fold((failure) => expect(failure, isA<LocalStorageFailure>()), (
+          list,
+        ) {
+          fail('expected to throw exception but got a list instead');
+        });
+
+        verify(localDataSource.getAllNoteEntries());
+        verifyNoMoreInteractions(localDataSource);
+      },
+    );
+
+    test(
+      'should return a UnexpectedFailure when any Exception occurs during note fetching',
+      () async {
+        // arrange
+        when(localDataSource.getAllNoteEntries()).thenThrow(Exception());
+        // action
+        final result = await repository.getAllNoteEntries();
+        // assert
+        result.fold((failure) => expect(failure, isA<UnexpectedFailure>()), (
+          list,
+        ) {
           fail('expected to throw exception but got a list instead');
         });
 
@@ -189,20 +259,41 @@ void main() {
       verifyNoMoreInteractions(localDataSource);
     });
     test(
-      'should return a LocalStorageFailure when an Exception occurs during note fetching',
+      'should return a LocalStorageFailure when a LocalStorageException occurs during note fetching',
       () async {
         // arrange
         when(
-          localDataSource.getAllNoteEntries(),
+          localDataSource.getNoteEntry('sampleId'),
         ).thenThrow(LocalStorageException());
         // action
-        final result = await repository.getAllNoteEntries();
+        final result = await repository.getNoteEntry('sampleId');
         // assert
-        result.fold((failure) => expect(true, true), (list) {
+        result.fold((failure) => expect(failure, isA<LocalStorageFailure>()), (
+          list,
+        ) {
           fail('expected to throw exception but got a list instead');
         });
 
-        verify(localDataSource.getAllNoteEntries());
+        verify(localDataSource.getNoteEntry('sampleId'));
+        verifyNoMoreInteractions(localDataSource);
+      },
+    );
+
+    test(
+      'should return a UnexpectedFailure when any Exception occurs during note fetching',
+      () async {
+        // arrange
+        when(localDataSource.getNoteEntry('sampleId')).thenThrow(Exception());
+        // action
+        final result = await repository.getNoteEntry('sampleId');
+        // assert
+        result.fold((failure) => expect(failure, isA<UnexpectedFailure>()), (
+          list,
+        ) {
+          fail('expected to throw exception but got a list instead');
+        });
+
+        verify(localDataSource.getNoteEntry('sampleId'));
         verifyNoMoreInteractions(localDataSource);
       },
     );
@@ -240,7 +331,7 @@ void main() {
       },
     );
     test(
-      'should return a LocalStorageFailure when an Exception occurs during note updating',
+      'should return a LocalStorageFailure when a LocalStorageException occurs during note updating',
       () async {
         // arrange
         when(localDataSource.getNoteEntry(any)).thenAnswer((_) async => note);
@@ -256,7 +347,9 @@ void main() {
           ),
         );
         // assert
-        result.fold((failure) => expect(true, true), (updatedNote) {
+        result.fold((failure) => expect(failure, isA<LocalStorageFailure>()), (
+          updatedNote,
+        ) {
           fail(
             'expected to throw exception but got note titled=${updatedNote.title} instead',
           );
@@ -282,7 +375,9 @@ void main() {
         ),
       );
       // assert
-      result.fold((failure) => expect(true, true), (updatedNote) {
+      result.fold((failure) => expect(failure, isA<NoteNotFoundFailure>()), (
+        updatedNote,
+      ) {
         fail(
           'expected to throw exception but got note titled=${updatedNote.title} instead',
         );
@@ -291,5 +386,34 @@ void main() {
       verify(localDataSource.getNoteEntry(any));
       verifyNoMoreInteractions(localDataSource);
     });
+
+    test(
+      'should return a UnexpectedFailure when any Exception occurs during note updating',
+      () async {
+        // arrange
+        when(localDataSource.getNoteEntry(any)).thenAnswer((_) async => note);
+        when(localDataSource.updateNoteEntry(any)).thenThrow(Exception());
+        // action
+        final result = await repository.updateNoteEntry(
+          UpdateNoteRequest(
+            id: 'sampleId',
+            title: 'sample title',
+            body: 'sample body',
+          ),
+        );
+        // assert
+        result.fold((failure) => expect(failure, isA<UnexpectedFailure>()), (
+          updatedNote,
+        ) {
+          fail(
+            'expected to throw exception but got note titled=${updatedNote.title} instead',
+          );
+        });
+
+        verify(localDataSource.getNoteEntry(any));
+        verify(localDataSource.updateNoteEntry(any));
+        verifyNoMoreInteractions(localDataSource);
+      },
+    );
   });
 }

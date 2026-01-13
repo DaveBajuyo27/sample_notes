@@ -1,10 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:sample_notes/features/notes/domain/dto/update_note_request.dart';
 import 'package:sample_notes/features/notes/domain/entities/note_entry.dart';
 import 'package:sample_notes/features/notes/domain/usecases/update_note_entry.dart';
 
-import '../../mocks/note_entry_repository_mocks.mocks.dart';
+import '../../mocks/all_mocks.mocks.dart';
 
 void main() {
   late MockNoteEntryRepository mockNoteEntryRepository;
@@ -31,7 +32,9 @@ void main() {
     ).thenAnswer((_) async => (Right(note)));
 
     // action
-    final result = await usecase(note);
+    final result = await usecase(
+      UpdateNoteRequest(id: note.id, title: note.title, body: note.body),
+    );
 
     // assert
     result.fold((failure) => fail('Expected Right but got $failure'), (

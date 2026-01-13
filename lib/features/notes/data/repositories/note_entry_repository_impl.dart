@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 import 'package:sample_notes/core/error/exceptions.dart';
 import 'package:sample_notes/core/error/failures.dart';
 import 'package:sample_notes/features/notes/data/datasources/note_entry_local_data_source.dart';
@@ -9,6 +10,7 @@ import 'package:sample_notes/features/notes/domain/entities/note_entry.dart';
 import 'package:sample_notes/features/notes/domain/repository/note_entry_repository.dart';
 import 'package:uuid/uuid.dart';
 
+@LazySingleton(as: NoteEntryRepository)
 class NoteEntryRepositoryImpl implements NoteEntryRepository {
   final NoteEntryLocalDataSource dataSource;
 
@@ -55,6 +57,10 @@ class NoteEntryRepositoryImpl implements NoteEntryRepository {
     try {
       final noteList = await dataSource.getAllNoteEntries();
       final newList = noteList.map((e) => e.toEntity()).toList();
+
+      // sort based on lastUpdated to hoist fresh notes
+      newList.sort((a, b) => b.lastUpdated.compareTo(a.lastUpdated));
+
       return Right(newList);
     } on LocalStorageException {
       return Left(LocalStorageFailure());
